@@ -2,7 +2,7 @@
 
 <div align="center">
   <br>
-      <img src="https://github.com/RJohnPaul/Current_Portfolio/blob/66d7ed01a23c6fabe1a0aa0ee0a422eea01c4ea4/2560x1600.png" alt="Project Banner">
+      <img src="https://github.com/RJohnPaul/Mongolian/blob/97cb9cb26c5aa620134a85ab812696233c95369f/2560x1600%20(5).png" alt="Project Banner">
   </br>
 </div>
 </br>
