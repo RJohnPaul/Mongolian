@@ -8,7 +8,7 @@
 </br>
 <div align="center">
   <br>
-      <img src="https://github.com/RJohnPaul/Current_Portfolio/blob/66d7ed01a23c6fabe1a0aa0ee0a422eea01c4ea4/2560x1600.png" alt="Project Banner">
+      <img src="https://github.com/RJohnPaul/Mongolian/blob/c36be99ee2869e8df2e0b8ba29ffc74f6475209b/Frame%2038.png" alt="Project Banner">
   </br>
 </div>
 </br>
