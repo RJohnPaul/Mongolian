@@ -18,6 +18,7 @@ To use Mongolian, follow these steps:
 
 2. **Create MongoDB Database and Collection (optional):**
    - To create the "Data" database and "customer_data" collection programmatically:
+     
      ```javascript
      // Connect to MongoDB
      const { MongoClient } = require('mongodb');
@@ -57,6 +58,7 @@ To use Mongolian, follow these steps:
 
 4. **Modify API Endpoint (Optional):**
    - If you need to customize the database and collection names, modify the `pages/api/customer_data.js` file:
+     
      ```javascript
      // pages/api/customer_data.js
 
@@ -69,6 +71,7 @@ To use Mongolian, follow these steps:
 
 5. **Start the Next.js Server:**
    - Run the following command to start the Next.js server:
+     
      ```bash
      npm run dev
      ```
