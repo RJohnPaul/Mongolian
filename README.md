@@ -87,8 +87,8 @@ To use Mongolian, follow these steps:
      const COLLECTION_NAME = 'customer_data'; // Modify collection name if necessary
      ```
 
-5. **Install Dependancies:**
-   - Run the following command to install all the dependancies:
+5. **Install Dependencies:**
+   - Run the following command to install all the dependencies:
      
      ```bash
      npm install
