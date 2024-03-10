@@ -1,113 +1,252 @@
-import Image from "next/image";
+// components/CustomerForm.js
+"use client";
+import React, { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import toast, { Toaster } from "react-hot-toast";
 
-export default function Home() {
+const CustomerForm = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    address: "",
+    applied_on: "",
+    treatment_chosen: "",
+    status: "",
+  });
+
+  const [customerData, setCustomerData] = useState([]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/customer_data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        toast.success("Data submitted successfully!");
+        // You can perform any additional actions here after successful submission
+        setFormData({
+          name: "",
+          email: "",
+          address: "",
+          applied_on: "",
+          treatment_chosen: "",
+          status: "",
+        });
+        fetchCustomerData(); // Refresh customer data
+      } else {
+        toast.error("Failed to submit data");
+      }
+    } catch (error) {
+      console.error("Error submitting data", error);
+      toast.error("Internal Server Error");
+    }
+  };
+
+  const fetchCustomerData = async () => {
+    try {
+      const response = await fetch("/api/customer_data");
+      if (response.ok) {
+        const data = await response.json();
+        setCustomerData(data);
+      } else {
+        toast.error("Failed to fetch customer data");
+      }
+    } catch (error) {
+      console.error("Error fetching customer data", error);
+      toast.error("Internal Server Error");
+    }
+  };
+
+  useEffect(() => {
+    fetchCustomerData();
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <section className="antialiased bg-gray-100 text-gray-600 min-h-screen p-4">
+      <div className="h-full">
+        <div className="relative px-4 sm:px-6 lg:px-8 max-w-lg mx-auto">
+          <img
+            className="rounded-t shadow-lg"
+            src="https://preview.cruip.com/mosaic/images/pay-bg.jpg"
+            width="460"
+            height="180"
+            alt="Pay background"
+          />
+        </div>
+        <div
+          className="relative px-4 sm:px-6 lg:px-8 pb-8 max-w-lg mx-auto"
+          x-data="{ card: true }"
+        >
+          <div className="bg-white px-8 pb-6 rounded-b shadow-xl">
+            <div className="text-center mb-6">
+              <div className="mb-2">
+                <img
+                  className="-mt-8 inline-flex rounded-full"
+                  src="https://john-porfolio.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fauthor.def0a855.jpg&w=640&q=100"
+                  width="64"
+                  height="64"
+                  alt="User"
+                />
+              </div>
+              <h1 className="text-xl leading-snug text-gray-800 font-semibold mb-2">
+                Customer Registeration
+              </h1>
+              <div className="text-sm transition-all duration-700">
+                Sample Form to Collect Data from Customers
+              </div>
+            </div>
+            <div>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="space-y-4">
+                  <div>
+                    <label
+                      className="block text-sm transition-all duration-700 font-medium mb-1"
+                      htmlFor="name"
+                    >
+                      Name:
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="text-sm transition-all duration-700 text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm transition-all duration-700 font-medium mb-1"
+                      htmlFor="email"
+                    >
+                      Email:
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="text-sm transition-all duration-700 text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
+                      placeholder="john@company.com"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm transition-all duration-700 font-medium mb-1"
+                      htmlFor="address"
+                    >
+                      Address:
+                    </label>
+                    <input
+                      type="text"
+                      id="address"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      required
+                      className="text-sm transition-all duration-700 text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
+                      placeholder="123 Main St"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm transition-all duration-700 font-medium mb-1"
+                      htmlFor="applied_on"
+                    >
+                      Applied On:
+                    </label>
+                    <DatePicker
+                      selected={formData.applied_on}
+                      onChange={(date) =>
+                        setFormData((prevState) => ({
+                          ...prevState,
+                          applied_on: date,
+                        }))
+                      }
+                      required
+                      className="text-sm transition-all duration-700 text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
+                      placeholderText="MM/DD/YYYY"
+                      dateFormat="MM/dd/yyyy" // Format of the date displayed
+                      id="applied_on"
+                      name="applied_on"
+                      popperPlacement="bottom-start" // Specify the placement of the dropdown
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm transition-all duration-700 font-medium mb-1"
+                      htmlFor="treatment_chosen"
+                    >
+                      Treatment Chosen:
+                    </label>
+                    <input
+                      type="text"
+                      id="treatment_chosen"
+                      name="treatment_chosen"
+                      value={formData.treatment_chosen}
+                      onChange={handleChange}
+                      required
+                      className="text-sm transition-all duration-700 text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
+                      placeholder="Treatment"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm transition-all duration-700 font-medium mb-1"
+                      htmlFor="status"
+                    >
+                      Gender:
+                    </label>
+                    <select
+                      id="status"
+                      name="status"
+                      value={formData.status}
+                      onChange={handleChange}
+                      required
+                      className="s-dropdown duration-700 text-sm transition-all text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
+                    >
+                      <option value="">Select Status</option>
+                      <option value="M">M</option>
+                      <option value="F">F</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div className="flex justify-center mt-6">
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-sm transition-all duration-700"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </section>
   );
-}
+};
+
+export default CustomerForm;
