@@ -70,14 +70,21 @@ To use Mongolian, follow these steps:
      const COLLECTION_NAME = 'customer_data'; // Modify collection name if necessary
      ```
 
-5. **Start the Next.js Server:**
+5. **Install Dependancies:**
+   - Run the following command to install all the dependancies:
+     
+     ```bash
+     npm install
+     ```
+     
+6. **Start the Next.js Server:**
    - Run the following command to start the Next.js server:
      
      ```bash
      npm run dev
      ```
 
-6. **Access the Application:**
+7. **Access the Application:**
    - Open your web browser and go to http://localhost:3000 to access Mongolian.
    - Fill out the form fields and submit the data.
 
