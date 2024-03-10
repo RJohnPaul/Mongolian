@@ -52,6 +52,7 @@ To use Mongolian, follow these steps:
 3. **Set Up Environment Variables:**
    - Create a `.env` file in the root directory of your project.
    - Add your MongoDB connection URI as `MONGODB_URI` in the `.env` file:
+     
      ```
      MONGODB_URI=your_mongodb_uri
      ```
