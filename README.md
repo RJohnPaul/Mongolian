@@ -1,5 +1,18 @@
 # Mongolian - MongoDB Next Starter Kit
 
+<div align="center">
+  <br>
+      <img src="https://github.com/RJohnPaul/Current_Portfolio/blob/66d7ed01a23c6fabe1a0aa0ee0a422eea01c4ea4/2560x1600.png" alt="Project Banner">
+  </br>
+</div>
+</br>
+<div align="center">
+  <br>
+      <img src="https://github.com/RJohnPaul/Current_Portfolio/blob/66d7ed01a23c6fabe1a0aa0ee0a422eea01c4ea4/2560x1600.png" alt="Project Banner">
+  </br>
+</div>
+</br>
+
 Mongolian is a MongoDB Next.js Starter Kit designed to streamline the development of dynamic web applications with Next.js and MongoDB. It features a smartly designed Tailwind CSS form for easy data input and real-time feedback with React hot toast notifications upon successful data submission.
 
 ## Try it out
