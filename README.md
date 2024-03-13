@@ -13,7 +13,7 @@
 </div>
 </br>
 
-Mongolian is a MongoDB Next.js Starter Kit designed to streamline the development of dynamic web applications with Next.js and MongoDB. It features a smartly designed Tailwind CSS form for easy data input and real-time feedback with React hot toast notifications upon successful data submission.
+Mongolian is a MongoDB Next.js Starter Kit designed to streamline the development of dynamic web applications with Next.js and MongoDB. It heavily has features such as a smartly designed Tailwind CSS form for easy data input and real-time feedback with React hot toast notifications upon successful data submission.
 
 ## Try it out
 - **Warning:** - **The currently deployed webapp is only to view and users are not advised to enter submit too many times as the database is actually a personal live database on MongoDB.**
