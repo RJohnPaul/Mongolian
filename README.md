@@ -19,7 +19,7 @@ Mongolian is a MongoDB Next.js Starter Kit designed to streamline the developmen
 - **Warning:** - **The currently deployed webapp is only to view and users are not advised to enter submit too many times as the database is actually a personal live database on MongoDB.**
 - View it - [Demo](https://mongolian.vercel.app/)
 
-## Features
+## 4 Main Features
 
 - **Next.js:** The React framework for building server-side rendered and statically generated web applications.
 - **MongoDB:** A NoSQL database for storing and retrieving data, providing flexibility and scalability.
