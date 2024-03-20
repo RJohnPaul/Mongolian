@@ -1,4 +1,4 @@
-# Mongolian - MongoDB Next Starter Kit
+# Mongolian - Your Upcoming MongoDB Next Starter Kit
 
 <div align="center">
   <br>
